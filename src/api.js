@@ -1,0 +1,2 @@
+export async function api(path,options={}){const res=await fetch('/api'+path,{...options,headers:options.body instanceof FormData?options.headers:{'Content-Type':'application/json',...options.headers},credentials:'same-origin'});const data=await res.json();if(!res.ok){const e=new Error(data.error||'تعذر الإرسال، حاول مرة أخرى.');e.status=res.status;throw e}return data}
+export const send=(path,data,method='POST')=>api(path,{method,body:JSON.stringify(data)});
